@@ -3,6 +3,16 @@ import { GeneratorFunction } from "./types/GeneratorTypes";
 import { getTreeCertificateTemplate } from "./templates/tree-certificate-template";
 var qs = require('querystring');
 
+var config = require('../config.json');
+var aws = require("aws-sdk");
+aws.config.update({
+  accessKeyId: config.aws.accessKeyId,
+  secretAccessKey: config.aws.secretAccessKey,
+  region: config.aws.region
+});
+var s3 = new aws.S3();
+var bucket = "floristone-product-images";
+
 export class PDFGenerator {
   /**
    * This function returns the buffer for a generated PDF of manual
@@ -53,6 +63,23 @@ export class PDFGenerator {
       console.log(event.body);
 
       var partnerName, partnerLogo, treeImage;
+
+      // check if pdf already exists in s3
+      // only works for GET type for time being
+      if (event.queryStringParameters !== null){
+        const pdf = await Helper.checkExistsInS3(event.queryStringParameters._p);
+        // exists, return pdf directly
+        if ("ContentLength" in pdf && pdf.ContentLength > 0){
+          return {
+            headers: {
+              "Content-type": "application/pdf"
+            },
+            statusCode: 200,
+            body: pdf.Body.toString('base64'),
+            isBase64Encoded: true,
+          };
+        }
+      }
 
       // GET
       // Standard JSON payload in base64 and stored url._p
@@ -151,31 +178,19 @@ export class PDFGenerator {
 
       const pdf = await Helper.getPdfBuffer(null, html, options);
 
-      function formatBytes(bytes: number, decimals = 2) {
-          if (bytes === 0) return '0 Bytes'
-
-          const k = 1024
-          const dm = decimals < 0 ? 0 : decimals
-          const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-
-          const i = Math.floor(Math.log(bytes) / Math.log(k))
-
-          return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
+      if (event.queryStringParameters !== null){
+        const storePdf = await Helper.uploadToS3(event.queryStringParameters._p, pdf);
       }
-
-      const responseSize = Buffer.byteLength(JSON.stringify(pdf.toString("base64")), 'utf-8');
-      console.log('FINAL Response' + responseSize);
-      console.log(formatBytes(responseSize));
 
       return {
         headers: {
           "Content-type": "application/pdf"
-          // , "Content-Disposition": "attachment; filename=restfile.pdf"
         },
         statusCode: 200,
         body: pdf.toString("base64"),
         isBase64Encoded: true,
       };
+
     } catch (error) {
       console.error("Error : ", error);
       return {
