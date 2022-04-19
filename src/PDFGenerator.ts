@@ -2,6 +2,19 @@ import { Helper } from "./Helper";
 import { GeneratorFunction } from "./types/GeneratorTypes";
 import { getTreeCertificateTemplate } from "./templates/tree-certificate-template";
 var qs = require('querystring');
+const fs = require('fs');
+const path = require('path');
+import img from './assets/images/banner_1.png';
+import img from './assets/images/banner_2.png';
+import img from './assets/images/banner_3.png';
+
+console.log(img);
+
+function base64_encode(file) {
+  console.log(file);
+  var bitmap = fs.readFileSync(file);
+  return new Buffer(bitmap).toString('base64');
+}
 
 var config = require('../config.json');
 var aws = require("aws-sdk");
@@ -66,20 +79,25 @@ export class PDFGenerator {
 
       // check if pdf already exists in s3
       // only works for GET type for time being
-      if (event.queryStringParameters !== null){
-        const pdf = await Helper.checkExistsInS3(event.queryStringParameters._p);
-        // exists, return pdf directly
-        if ("ContentLength" in pdf && pdf.ContentLength > 0){
-          return {
-            headers: {
-              "Content-type": "application/pdf"
-            },
-            statusCode: 200,
-            body: pdf.Body.toString('base64'),
-            isBase64Encoded: true,
-          };
-        }
-      }
+      // if (event.queryStringParameters !== null){
+      //   const pdf = await Helper.checkExistsInS3(event.queryStringParameters._p);
+      //   // exists, return pdf directly
+      //   if ("ContentLength" in pdf && pdf.ContentLength > 0){
+      //     return {
+      //       headers: {
+      //         "Content-type": "application/pdf"
+      //       },
+      //       statusCode: 200,
+      //       body: pdf.Body.toString('base64'),
+      //       isBase64Encoded: true,
+      //     };
+      //   }
+      // }
+
+      // console.log(process.env.LAMBDA_TASK_ROOT);
+      // console.log(path.resolve("./assets/images/img/banner_1.png"));
+      // console.log(img);
+      // var treeImage = 'data:image/png;base64,' + base64_encode(path.resolve("./src/assets/images/banner_1.png"));
 
       // GET
       // Standard JSON payload in base64 and stored url._p
@@ -143,13 +161,16 @@ export class PDFGenerator {
       // tree image
       switch(data.treeImage){
         case "PINE":
-          treeImage = 'https://cdn.floristone.com/tree-certificate/banner_1(25).png';
+          // treeImage = 'https://cdn.floristone.com/tree-certificate/banner_1(25).png';
+          treeImage = 'data:image/png;base64,' + base64_encode(path.resolve("./src/assets/images/banner_1.png"));
           break;
         case "PALM":
-          treeImage = 'https://cdn.floristone.com/tree-certificate/banner_2(25).png';
+          // treeImage = 'https://cdn.floristone.com/tree-certificate/banner_2(25).png';
+          treeImage = 'data:image/png;base64,' + base64_encode(path.resolve("./src/assets/images/banner_2.png"));
           break;
         case "WOODLAND":
-          treeImage = 'https://cdn.floristone.com/tree-certificate/banner_3(25).png';
+          // treeImage = 'https://cdn.floristone.com/tree-certificate/banner_3(25).png';
+          treeImage = 'data:image/png;base64,' + base64_encode(path.resolve("./src/assets/images/banner_3.png"));
           break;
       }
 

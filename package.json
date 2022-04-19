@@ -12,6 +12,7 @@
   "dependencies": {
     "aws-sdk": "^2.1108.0",
     "chrome-aws-lambda": "^3.1.1",
+    "file-loader": "^6.2.0",
     "handlebars": "^4.7.7",
     "puppeteer-core": "^3.3.0"
   },
