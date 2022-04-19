@@ -21,7 +21,7 @@ const html: string = `
           margin: auto;
       }
       .banner{
-          background-image: url('{{treeImage}}');
+          /*background-image: url('{{treeImage}}');*/
           background-repeat: no-repeat;
           background-size: 100% 100%;
           background-position: center;
@@ -173,7 +173,8 @@ const html: string = `
     </style>
 </head>
 <body>
-    <div class="banner">
+    <div class="banner" style="background-image: url('{{treeImage}}');">
+      <!-- <img src="{{treeImage}}" style="height: 100%; width: 100%;"> -->
      <div class="container">
 
      </div><!--container-->
