@@ -83,25 +83,20 @@ export class PDFGenerator {
 
       // check if pdf already exists in s3
       // only works for GET type for time being
-      // if (event.queryStringParameters !== null){
-      //   const pdf = await Helper.checkExistsInS3(event.queryStringParameters._p);
-      //   // exists, return pdf directly
-      //   if ("ContentLength" in pdf && pdf.ContentLength > 0){
-      //     return {
-      //       headers: {
-      //         "Content-type": "application/pdf"
-      //       },
-      //       statusCode: 200,
-      //       body: pdf.Body.toString('base64'),
-      //       isBase64Encoded: true,
-      //     };
-      //   }
-      // }
-
-      // console.log(process.env.LAMBDA_TASK_ROOT);
-      // console.log(path.resolve("./assets/images/img/banner_1.png"));
-      // console.log(img);
-      // var treeImage = 'data:image/png;base64,' + base64_encode(path.resolve("./src/assets/images/banner_1.png"));
+      if (event.queryStringParameters !== null){
+        const pdf = await Helper.checkExistsInS3(event.queryStringParameters._p);
+        // exists, return pdf directly
+        if ("ContentLength" in pdf && pdf.ContentLength > 0){
+          return {
+            headers: {
+              "Content-type": "application/pdf"
+            },
+            statusCode: 200,
+            body: pdf.Body.toString('base64'),
+            isBase64Encoded: true,
+          };
+        }
+      }
 
       // GET
       // Standard JSON payload in base64 and stored url._p
