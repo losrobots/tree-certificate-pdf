@@ -59,6 +59,7 @@ const html: string = `
       }
       .inner{
           padding-top: 10px;
+          overflow: hidden;
       }
       .inner h2{
           display: inline-block;
@@ -68,15 +69,21 @@ const html: string = `
           font-weight: 500;
           margin-bottom: 20px;
       }
-      .inner img{
+      .inner img.left{
           height: 34px;
-          margin-left: 50px;
+          margin-left: 16px;
           margin-right: 50px;
           position: relative;
           top: 2px;
       }
+      .inner img.right{
+          height: 34px;
+          margin-left: 50px;
+          margin-right: 16px;
+          position: relative;
+          top: 2px;
+      }
       .rectangle{
-          background-image: url('https://cdn.floristone.com/tree-certificate/rectangle.png');
           background-repeat: no-repeat;
           padding-top: 8px;
           padding-bottom: 5px;
@@ -185,9 +192,9 @@ const html: string = `
        <div class="divider">
     </div>
     <div class="inner">
-     <img src="{{treeIcon}}" alt="">
+     <img src="{{treeIcon}}" class="left" alt="">
      <h2>{{recipientName}}</h2>
-     <img src="{{treeIcon}}" alt="">
+     <img src="{{treeIcon}}" class="right" alt="">
     </div><!--inner-->
 
     <div class="divider">
