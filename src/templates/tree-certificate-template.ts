@@ -174,7 +174,6 @@ const html: string = `
 </head>
 <body>
     <div class="banner" style="background-image: url('{{treeImage}}');">
-      <!-- <img src="{{treeImage}}" style="height: 100%; width: 100%;"> -->
      <div class="container">
 
      </div><!--container-->
