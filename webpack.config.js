@@ -46,12 +46,7 @@ module.exports = {
         loader: 'file-loader',
         options: {
           name(resourcePath, resourceQuery) {
-            // `resourcePath` - `/absolute/path/to/file.js`
-            // `resourceQuery` - `?foo=bar`
-            // if (process.env.NODE_ENV === 'development') {
-              return '[path][name].[ext]';
-            // }
-            // return '[contenthash].[ext]';
+            return '[path][name].[ext]';
           },
         },
       },

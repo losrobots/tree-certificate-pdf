@@ -170,8 +170,6 @@ export class PDFGenerator {
           break;
       }
 
-      console.log(treeImage);
-
       const html = getTreeCertificateTemplate({
         recipientName: data.recipientName,
         senderName: data.senderName,
@@ -190,8 +188,6 @@ export class PDFGenerator {
         linen: 'data:image/jpg;base64,' + base64_encode(linen),
         rectangle: 'data:image/png;base64,' + base64_encode(rectangle),
       });
-
-      console.log(html);
 
       const options = {
         format: "Letter",
