@@ -9,7 +9,7 @@ module.exports = {
   entry: slsw.lib.entries,
   devtool: slsw.lib.webpack.isLocal ? 'cheap-module-eval-source-map' : 'source-map',
   resolve: {
-    extensions: ['.mjs', '.json', '.ts'],
+    extensions: ['.mjs', '.json', '.ts', '.png', '.jpg', '.gif'],
     symlinks: false,
     cacheWithContext: false,
   },
@@ -19,6 +19,9 @@ module.exports = {
     filename: '[name].js',
   },
   target: 'node',
+  node: {
+    __dirname: false,
+  },
   externals: [nodeExternals()],
   module: {
     rules: [
@@ -36,6 +39,15 @@ module.exports = {
         options: {
           transpileOnly: true,
           experimentalWatchApi: true,
+        },
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          name(resourcePath, resourceQuery) {
+            return '[path][name].[ext]';
+          },
         },
       },
     ],

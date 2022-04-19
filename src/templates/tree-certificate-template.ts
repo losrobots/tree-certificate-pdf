@@ -21,7 +21,6 @@ const html: string = `
           margin: auto;
       }
       .banner{
-          background-image: url('{{treeImage}}');
           background-repeat: no-repeat;
           background-size: 100% 100%;
           background-position: center;
@@ -31,7 +30,6 @@ const html: string = `
           z-index: 999;
       }
       .memory{
-          background-image: url('https://cdn.floristone.com/tree-certificate/linen.jpg');
           background-repeat:repeat;
           background-position: center;
           padding-top: 50px;
@@ -61,6 +59,7 @@ const html: string = `
       }
       .inner{
           padding-top: 10px;
+          overflow: hidden;
       }
       .inner h2{
           display: inline-block;
@@ -70,15 +69,21 @@ const html: string = `
           font-weight: 500;
           margin-bottom: 20px;
       }
-      .inner img{
+      .inner img.left{
           height: 34px;
-          margin-left: 50px;
+          margin-left: 16px;
           margin-right: 50px;
           position: relative;
           top: 2px;
       }
+      .inner img.right{
+          height: 34px;
+          margin-left: 50px;
+          margin-right: 16px;
+          position: relative;
+          top: 2px;
+      }
       .rectangle{
-          background-image: url('https://cdn.floristone.com/tree-certificate/rectangle.png');
           background-repeat: no-repeat;
           padding-top: 8px;
           padding-bottom: 5px;
@@ -173,13 +178,13 @@ const html: string = `
     </style>
 </head>
 <body>
-    <div class="banner">
+    <div class="banner" style="background-image: url('{{treeImage}}');">
      <div class="container">
 
      </div><!--container-->
     </div><!--banner-->
 
-    <div class="memory">
+    <div class="memory" style="background-image: url('{{linen}}');">
      <div class="container">
          <div class="align">
        <h1>{{title}}</h1>
@@ -187,14 +192,15 @@ const html: string = `
        <div class="divider">
     </div>
     <div class="inner">
-     <img src="https://cdn.floristone.com/tree-certificate/tree-Icon.png" alt="">  <h2>{{recipientName}}</h2>
-     <img src="https://cdn.floristone.com/tree-certificate/tree-Icon.png" alt="">
+     <img src="{{treeIcon}}" class="left" alt="">
+     <h2>{{recipientName}}</h2>
+     <img src="{{treeIcon}}" class="right" alt="">
     </div><!--inner-->
 
     <div class="divider">
     </div>
 
-    <div class="rectangle">
+    <div class="rectangle" style="background-image: url('{{rectangle}}');">
       <h4>{{numberOfTrees}}</h4>
 
     </div><!--rectangle-->

@@ -2,6 +2,23 @@ import { Helper } from "./Helper";
 import { GeneratorFunction } from "./types/GeneratorTypes";
 import { getTreeCertificateTemplate } from "./templates/tree-certificate-template";
 var qs = require('querystring');
+const fs = require('fs');
+const path = require('path');
+import img0 from './assets/images/banner_1.png';
+import img1 from './assets/images/banner_2.png';
+import img2 from './assets/images/banner_3.png';
+import logo0 from './assets/images/american-forests-logo.png';
+import logo1 from './assets/images/canadian-institute.png';
+import logo2 from './assets/images/one-tree-planted-logo.png';
+import treeIcon from './assets/images/tree-Icon.png';
+import linen from './assets/images/linen.jpg';
+import rectangle from './assets/images/rectangle.png';
+
+function base64_encode(file) {
+  console.log(file);
+  var bitmap = fs.readFileSync(file);
+  return new Buffer.from(bitmap).toString('base64');
+}
 
 var config = require('../config.json');
 var aws = require("aws-sdk");
@@ -128,28 +145,28 @@ export class PDFGenerator {
       switch(data.partner){
         case "AMERICAN_FORESTS":
           partnerName = 'American Forests';
-          partnerLogo = 'https://cdn.floristone.com/tree-certificate/american-forests-logo.png';
+          partnerLogo = 'data:image/png;base64,' + base64_encode(logo0);
           break;
         case "CANADIAN_INSTITUTE":
           partnerName = 'Canadian Institute of Forestry';
-          partnerLogo = 'https://cdn.floristone.com/tree-certificate/canadian-institute.png';
+          partnerLogo = 'data:image/png;base64,' + base64_encode(logo1);
           break;
         case "ONE_TREE_PLANTED":
           partnerName = 'One Tree Planted';
-          partnerLogo = 'https://cdn.floristone.com/tree-certificate/one-tree-planted-logo.png';
+          partnerLogo = 'data:image/png;base64,' + base64_encode(logo2);
           break;
       }
 
       // tree image
       switch(data.treeImage){
         case "PINE":
-          treeImage = 'https://cdn.floristone.com/tree-certificate/banner_1(25).png';
+          treeImage = 'data:image/png;base64,' + base64_encode(img0);
           break;
         case "PALM":
-          treeImage = 'https://cdn.floristone.com/tree-certificate/banner_2(25).png';
+          treeImage = 'data:image/png;base64,' + base64_encode(img1);
           break;
         case "WOODLAND":
-          treeImage = 'https://cdn.floristone.com/tree-certificate/banner_3(25).png';
+          treeImage = 'data:image/png;base64,' + base64_encode(img2);
           break;
       }
 
@@ -166,7 +183,10 @@ export class PDFGenerator {
         senderHeading: data.senderHeading,
         dateHeading: data.dateHeading,
         partnerHeading: data.partnerHeading,
-        footer: data.footer
+        footer: data.footer,
+        treeIcon: 'data:image/png;base64,' + base64_encode(treeIcon),
+        linen: 'data:image/jpg;base64,' + base64_encode(linen),
+        rectangle: 'data:image/png;base64,' + base64_encode(rectangle),
       });
 
       const options = {
