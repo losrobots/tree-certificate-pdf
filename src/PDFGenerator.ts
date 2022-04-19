@@ -10,6 +10,9 @@ import img2 from './assets/images/banner_3.png';
 import logo0 from './assets/images/american-forests-logo.png';
 import logo1 from './assets/images/canadian-institute.png';
 import logo2 from './assets/images/one-tree-planted-logo.png';
+import treeIcon from './assets/images/tree-Icon.png';
+import linen from './assets/images/linen.jpg';
+import rectangle from './assets/images/rectangle.png';
 
 function base64_encode(file) {
   console.log(file);
@@ -187,7 +190,10 @@ export class PDFGenerator {
         senderHeading: data.senderHeading,
         dateHeading: data.dateHeading,
         partnerHeading: data.partnerHeading,
-        footer: data.footer
+        footer: data.footer,
+        treeIcon: 'data:image/png;base64,' + base64_encode(treeIcon),
+        linen: 'data:image/jpg;base64,' + base64_encode(linen),
+        rectangle: 'data:image/png;base64,' + base64_encode(rectangle),
       });
 
       console.log(html);

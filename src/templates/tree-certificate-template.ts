@@ -21,7 +21,6 @@ const html: string = `
           margin: auto;
       }
       .banner{
-          /*background-image: url('{{treeImage}}');*/
           background-repeat: no-repeat;
           background-size: 100% 100%;
           background-position: center;
@@ -31,7 +30,6 @@ const html: string = `
           z-index: 999;
       }
       .memory{
-          background-image: url('https://cdn.floristone.com/tree-certificate/linen.jpg');
           background-repeat:repeat;
           background-position: center;
           padding-top: 50px;
@@ -179,7 +177,7 @@ const html: string = `
      </div><!--container-->
     </div><!--banner-->
 
-    <div class="memory">
+    <div class="memory" style="background-image: url('{{linen}}');">
      <div class="container">
          <div class="align">
        <h1>{{title}}</h1>
@@ -187,14 +185,15 @@ const html: string = `
        <div class="divider">
     </div>
     <div class="inner">
-     <img src="https://cdn.floristone.com/tree-certificate/tree-Icon.png" alt="">  <h2>{{recipientName}}</h2>
-     <img src="https://cdn.floristone.com/tree-certificate/tree-Icon.png" alt="">
+     <img src="{{treeIcon}}" alt="">
+     <h2>{{recipientName}}</h2>
+     <img src="{{treeIcon}}" alt="">
     </div><!--inner-->
 
     <div class="divider">
     </div>
 
-    <div class="rectangle">
+    <div class="rectangle" style="background-image: url('{{rectangle}}');">
       <h4>{{numberOfTrees}}</h4>
 
     </div><!--rectangle-->
