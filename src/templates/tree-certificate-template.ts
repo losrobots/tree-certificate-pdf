@@ -10,14 +10,16 @@ const html: string = `
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Emoji&display=swap" rel="stylesheet">
     <style>
       body{
           margin: 0;
           padding: 0;
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Montserrat', 'Noto Emoji', sans-serif;
       }
       .container{
           width: 1170px;
+          max-height: 100%;
           margin: auto;
       }
       .banner{
@@ -68,6 +70,9 @@ const html: string = `
           font-size: 30px;
           font-weight: 500;
           margin-bottom: 20px;
+          max-height: 38px;
+          min-height: 38px;
+          height: 38px;
       }
       .inner img.left{
           height: 34px;
@@ -112,6 +117,9 @@ const html: string = `
           margin-top: 0;
           font-weight: 500;
           margin-bottom: 18px;
+          max-height: 28px;
+          height: 28px;
+          min-height: 28px;
       }
       .align{
           text-align: center;

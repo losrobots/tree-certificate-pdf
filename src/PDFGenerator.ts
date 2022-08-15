@@ -15,7 +15,7 @@ import linen from './assets/images/linen.jpg';
 import rectangle from './assets/images/rectangle.png';
 
 function base64_encode(file) {
-  console.log(file);
+  // console.log(file);
   var bitmap = fs.readFileSync(file);
   return new Buffer.from(bitmap).toString('base64');
 }
@@ -83,20 +83,20 @@ export class PDFGenerator {
 
       // check if pdf already exists in s3
       // only works for GET type for time being
-      if (event.queryStringParameters !== null){
-        const pdf = await Helper.checkExistsInS3(event.queryStringParameters._p);
-        // exists, return pdf directly
-        if ("ContentLength" in pdf && pdf.ContentLength > 0){
-          return {
-            headers: {
-              "Content-type": "application/pdf"
-            },
-            statusCode: 200,
-            body: pdf.Body.toString('base64'),
-            isBase64Encoded: true,
-          };
-        }
-      }
+      // if (event.queryStringParameters !== null){
+      //   const pdf = await Helper.checkExistsInS3(event.queryStringParameters._p);
+      //   // exists, return pdf directly
+      //   if ("ContentLength" in pdf && pdf.ContentLength > 0){
+      //     return {
+      //       headers: {
+      //         "Content-type": "application/pdf"
+      //       },
+      //       statusCode: 200,
+      //       body: pdf.Body.toString('base64'),
+      //       isBase64Encoded: true,
+      //     };
+      //   }
+      // }
 
       // GET
       // Standard JSON payload in base64 and stored url._p
@@ -124,9 +124,9 @@ export class PDFGenerator {
         }
       }
 
-      console.log(data);
-      data.recipientName = data.recipientName.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
-      data.senderName = data.senderName.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
+      // console.log(data);
+      // data.recipientName = data.recipientName.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
+      // data.senderName = data.senderName.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
 
       // format date
       if (data.dateOfCertificate != null && data.dateOfCertificate.length > 0){
@@ -189,6 +189,8 @@ export class PDFGenerator {
         rectangle: 'data:image/png;base64,' + base64_encode(rectangle),
       });
 
+      console.log(html);
+
       const options = {
         format: "Letter",
         landscape: true,
@@ -198,9 +200,9 @@ export class PDFGenerator {
 
       const pdf = await Helper.getPdfBuffer(null, html, options);
 
-      if (event.queryStringParameters !== null){
-        const storePdf = await Helper.uploadToS3(event.queryStringParameters._p, pdf);
-      }
+      // if (event.queryStringParameters !== null){
+      //   const storePdf = await Helper.uploadToS3(event.queryStringParameters._p, pdf);
+      // }
 
       return {
         headers: {
