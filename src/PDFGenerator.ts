@@ -7,6 +7,7 @@ const path = require('path');
 import img0 from './assets/images/banner_1.png';
 import img1 from './assets/images/banner_2.png';
 import img2 from './assets/images/banner_3.png';
+import img3 from './assets/images/banner_4.png';
 import logo0 from './assets/images/american-forests-logo.png';
 import logo1 from './assets/images/canadian-institute.png';
 import logo2 from './assets/images/one-tree-planted-logo.png';
@@ -167,6 +168,9 @@ export class PDFGenerator {
           break;
         case "WOODLAND":
           treeImage = 'data:image/png;base64,' + base64_encode(img2);
+          break;
+        case "AUSTRALIA":
+          treeImage = 'data:image/png;base64,' + base64_encode(img3);
           break;
       }
 
