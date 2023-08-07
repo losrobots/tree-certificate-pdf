@@ -178,10 +178,15 @@ const html: string = `
       }
       .footer{
           background: linear-gradient(#705339,#99714D, #99714D );
-          padding-bottom: 5px;
-          padding-top: 5px;
+          padding-bottom: 6px;
+          padding-top: 7px;
           font-size: 18px;
           font-weight: 400;
+      }
+      @media print {
+        .container {
+           break-inside: avoid;
+        }
       }
     </style>
 </head>

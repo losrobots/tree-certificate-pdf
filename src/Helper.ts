@@ -1,4 +1,5 @@
-import * as chromium from "chrome-aws-lambda";
+const puppeteer = require("puppeteer-core");
+const chromium = require("@sparticuz/chromium");
 
 import { GetPDFBuffer } from "./types/HelperTypes";
 
@@ -16,12 +17,10 @@ export class Helper {
   static getPdfBuffer: GetPDFBuffer = async (url: string, html: string, options: any) => {
     let browser = null;
     try {
-      const executablePath = process.env.IS_OFFLINE
-        ? null
-        : await chromium.executablePath;
-      browser = await chromium.puppeteer.launch({
+
+      const browser = await puppeteer.launch({
         args: chromium.args,
-        executablePath,
+        executablePath: await chromium.executablePath(),
       });
 
       const page = await browser.newPage();
