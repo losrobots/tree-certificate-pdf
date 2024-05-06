@@ -15,7 +15,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs20.x
   region: ${opt:region, 'us-west-2'}
   endpointType: REGIONAL
   stage: ${opt:stage, 'dev'}

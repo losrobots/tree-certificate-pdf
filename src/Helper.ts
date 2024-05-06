@@ -19,7 +19,7 @@ export class Helper {
     try {
 
       const browser = await puppeteer.launch({
-        args: chromium.args,
+        args: [...chromium.args, '--disable-gpu'],
         executablePath: await chromium.executablePath(),
       });
 
