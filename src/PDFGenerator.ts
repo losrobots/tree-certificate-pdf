@@ -11,6 +11,7 @@ import img3 from './assets/images/banner_4.png';
 import logo0 from './assets/images/american-forests-logo.png';
 import logo1 from './assets/images/canadian-institute.png';
 import logo2 from './assets/images/one-tree-planted-logo.png';
+import logo3 from './assets/images/arbor-day-logo.png';
 import treeIcon from './assets/images/tree-Icon.png';
 import linen from './assets/images/linen.jpg';
 import rectangle from './assets/images/rectangle.png';
@@ -155,6 +156,10 @@ export class PDFGenerator {
         case "ONE_TREE_PLANTED":
           partnerName = 'One Tree Planted';
           partnerLogo = 'data:image/png;base64,' + base64_encode(logo2);
+          break;
+        case "ARBOR_DAY":
+          partnerName = 'Arbor Day Foundation';
+          partnerLogo = 'data:image/png;base64,' + base64_encode(logo3);
           break;
       }
 
