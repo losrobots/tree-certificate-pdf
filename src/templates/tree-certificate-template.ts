@@ -16,6 +16,22 @@ const html: string = `
           margin: 0;
           padding: 0;
           font-family: 'Montserrat', 'Noto Emoji', sans-serif;
+          position: relative;
+      }
+      .watermark {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) rotate(-30deg);
+          font-size: 110px;
+          font-weight: 600;
+          color: rgba(180, 0, 0, 0.25);
+          letter-spacing: 8px;
+          text-transform: uppercase;
+          white-space: nowrap;
+          z-index: 99999;
+          pointer-events: none;
+          user-select: none;
       }
       .container{
           width: 1170px;
@@ -191,6 +207,10 @@ const html: string = `
     </style>
 </head>
 <body>
+    {{#if testMode}}
+      <div class="watermark">TEST CERTIFICATE</div>
+    {{/if}}
+
     <div class="banner" style="background-image: url('{{treeImage}}');">
      <div class="container">
 

@@ -78,8 +78,8 @@ export class PDFGenerator {
   static renderTreeCertificate: GeneratorFunction = async (event) => {
     try {
 
-      console.log(event);
-      console.log(event.body);
+      // console.log(event);
+      // console.log(event.body);
 
       var partnerName, partnerLogo, treeImage;
 
@@ -126,7 +126,7 @@ export class PDFGenerator {
         }
       }
 
-      // console.log(data);
+      console.log(data);
       // data.recipientName = data.recipientName.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
       // data.senderName = data.senderName.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
 
@@ -193,12 +193,13 @@ export class PDFGenerator {
         dateHeading: data.dateHeading,
         partnerHeading: data.partnerHeading,
         footer: data.footer,
+        testMode: data.testMode,
         treeIcon: 'data:image/png;base64,' + base64_encode(treeIcon),
         linen: 'data:image/jpg;base64,' + base64_encode(linen),
         rectangle: 'data:image/png;base64,' + base64_encode(rectangle),
       });
 
-      console.log(html);
+      // console.log(html);
 
       const options = {
         format: "Letter",
