@@ -1,5 +1,7 @@
 import * as handlebars from "handlebars";
 
+handlebars.registerHelper("eq", (a, b) => a === b);
+
 const html: string = `
 <!DOCTYPE html>
 <html lang="en">
@@ -207,7 +209,7 @@ const html: string = `
     </style>
 </head>
 <body>
-    {{#if testMode}}
+    {{#if (eq testMode true)}}
       <div class="watermark">TEST CERTIFICATE</div>
     {{/if}}
 
